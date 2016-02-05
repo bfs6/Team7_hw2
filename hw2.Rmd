@@ -1,0 +1,23 @@
+Homework 2 - TeamName
+========================================================
+
+## `is_valid`
+
+
+
+## `is_undirected`
+
+
+
+## `is_isomorphic`
+
+
+
+## `is_connected`
+
+
+
+## `shortest_path`
+
+
+<!-- If you attempt the extra credit, include your description below. -->
