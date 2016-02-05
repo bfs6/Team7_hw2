@@ -10,19 +10,19 @@ is_undirected = function(g)
 }
 
 
-is_isomorphic(g1, g2)
+is_isomorphic = function(g1, g2)
 {
     return(FALSE)
 }
 
     
-is_connected(g, v1, v2)
+is_connected = function(g, v1, v2)
 {
     return(character())
 }
 
 
-shortest_path(g, v1, v2)
+shortest_path = function(g, v1, v2)
 {
     return(character())
 }
