@@ -1,8 +1,39 @@
 is_valid = function(g)
 {
+  #Check that g is a list of lists
+  v = c()
+  if (typeof(g) == "list"){
+    v = c(v,TRUE)
+  }
+  else {
+    v = c(v,FALSE)
+  }
+  
+  for (i in g){
+    if (typeof(i) == "list"){
+      v = c(v,TRUE)
+    }
+    else{
+      v = c(v,FALSE)
+    }
+  }
+  
+  #Check that the list names are unique
+  if (nlevels(factor(names(g))) == length(factor(names(g)))){
+    v = c(v, TRUE)
+  }
+  else {
+    v = c(v, FALSE)
+  }
+  
+  #Check that 
+  
+  
+  
+  
     return(TRUE)
 }
-
+typeof(graph1)
 
 is_undirected = function(g)
 {
@@ -46,3 +77,19 @@ adj_matrix <- function(g)
   }
   return(m)
 }
+
+graph1 = list(A = list(edges   = c(2L),
+                       weights = c(1 )),
+              B = list(edges   = c(3L),
+                       weights = c(1 )),
+              C = list(edges   = c(5L),
+                       weights = c(1 )),
+              D = list(edges   = c(2L),
+                       weights = c(1 )),
+              E = list(edges   = c(4L,6L),
+                       weights = c(1,1  )),
+              E = list(edges   = c(),
+                       weights = c())
+)
+
+names(graph1)[1]
