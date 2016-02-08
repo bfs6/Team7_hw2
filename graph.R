@@ -1,22 +1,43 @@
-is_valid = function(g)
-{
+is_valid = function(g) {
+  #Remark: in a valid graph, some vertices have empty vectors for edges and vertices if they don't point to anywhere
   #Check that g is a list of lists
   v = c()
-  if (typeof(g) == "list"){
-    v = c(v,TRUE)
-  }
-  else {
-    v = c(v,FALSE)
-  }
+  v=c(v,is.list(g))
   
   for (i in g){
-    if (typeof(i) == "list"){
-      v = c(v,TRUE)
-    }
+    v=c(v,is.list(i))
+  }
+  
+  #Check that the list names are unique
+  v=c(v,nlevels(factor(names(g))) == length(factor(names(g))))
+  
+  #Check that each secondary list contains only edges and weights vectors that are of the appropriate type.
+  for (i in 1:length(g)){
+    v=c(v,is.integer(g[[i]][[1]])|is.null(g[[i]][[1]]))  
+    if(is.null(g[[i]][[2]])){v=c(v,TRUE)}
     else{
-      v = c(v,FALSE)
+      for (x in g[[i]][[2]]){
+        v=c(v,is.double(x))
+      }
     }
   }
+  
+  # Check that there are not any edges to non-existent vertices
+  for (i in 1:length(g)){
+    v=c(v,prod(g[[i]][[1]]<=length(g)) == 1)
+  }
+  
+  # Check that all weights are greater than 0.
+  for (i in 1:length(g)){
+    v=c(v,prod(g[[i]][[2]]>0) == 1)
+  }
+  
+  print(v)
+  return(prod(v)==1)
+}
+is_valid(graph1)
+is_valid(graph2)
+
   
   #Check that the list names are unique
   if (nlevels(factor(names(g))) == length(factor(names(g)))){
