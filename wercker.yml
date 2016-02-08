@@ -15,12 +15,12 @@ build:
         code: |
           echo ""
           mkdir tests
-          wget -nv https://raw.githubusercontent.com/Sta323-Sp16/Homework/master/hw2/tests/test_is_connected.R  -O tests/test_is_connected.R
-          wget -nv https://raw.githubusercontent.com/Sta323-Sp16/Homework/master/hw2/tests/test_is_isomorphic.R -O tests/test_is_isomorphic.R
-          wget -nv https://raw.githubusercontent.com/Sta323-Sp16/Homework/master/hw2/tests/test_is_undirected.R -O tests/test_is_undirected.R
-          wget -nv https://raw.githubusercontent.com/Sta323-Sp16/Homework/master/hw2/tests/test_is_valid.R      -O tests/test_is_valid.R
-          wget -nv https://raw.githubusercontent.com/Sta323-Sp16/Homework/master/hw2/tests/test_min_span_tree.R -O tests/test_min_span_tree.R
-          wget -nv https://raw.githubusercontent.com/Sta323-Sp16/Homework/master/hw2/tests/test_shortest_path.R -O tests/test_shortest_path.R
+          wget -nv https://raw.githubusercontent.com/Sta323-Sp16/Homework/master/hw2/tests/01_test_is_valid.R      -O tests/01_test_is_valid.R
+          wget -nv https://raw.githubusercontent.com/Sta323-Sp16/Homework/master/hw2/tests/02_test_is_undirected.R -O tests/02_test_is_undirected.R
+          wget -nv https://raw.githubusercontent.com/Sta323-Sp16/Homework/master/hw2/tests/03_test_is_isomorphic.R -O tests/03_test_is_isomorphic.R
+          wget -nv https://raw.githubusercontent.com/Sta323-Sp16/Homework/master/hw2/tests/04_test_is_connected.R  -O tests/04_test_is_connected.R
+          wget -nv https://raw.githubusercontent.com/Sta323-Sp16/Homework/master/hw2/tests/05_test_shortest_path.R -O tests/05_test_shortest_path.R
+          wget -nv https://raw.githubusercontent.com/Sta323-Sp16/Homework/master/hw2/tests/06_test_min_span_tree.R -O tests/06_test_min_span_tree.R
     - script:
         name: Run Tests
         code: |
