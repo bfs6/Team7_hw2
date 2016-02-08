@@ -38,22 +38,7 @@ is_valid = function(g) {
 is_valid(graph1)
 is_valid(graph2)
 
-  
-  #Check that the list names are unique
-  if (nlevels(factor(names(g))) == length(factor(names(g)))){
-    v = c(v, TRUE)
-  }
-  else {
-    v = c(v, FALSE)
-  }
-  
-  #Check that 
-  
-  
-  
-  
-    return(TRUE)
-}
+
 typeof(graph1)
 
 is_undirected = function(g)
