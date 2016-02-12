@@ -2,99 +2,149 @@ is_valid = function(g) {
   #Remark: in a valid graph, some vertices have empty vectors for edges and vertices if they don't point to anywhere
   #Check that g is a list of lists
   v = c()
-  if (typeof(g) == "list"){ 
-    v = c(v,TRUE)
-    }
-  else {
-    v = c(v,FALSE)
-    }
+  v=c(v,is.list(g))
   
   for (i in g){
-    if (typeof(i) == "list"){
-      v = c(v,TRUE)
-      }
-    else{
-      v = c(v,FALSE)
-      }
+    v=c(v,is.list(i))
   }
   
   #Check that the list names are unique
-  if (nlevels(factor(names(g))) == length(factor(names(g)))){ #factor takes out repetitive elements.
-    v = c(v, TRUE)
-  }
-  else {
-    v = c(v, FALSE)
-  }
+  v=c(v,nlevels(factor(names(g))) == length(factor(names(g))))
   
   #Check that each secondary list contains only edges and weights vectors that are of the appropriate type.
   for (i in 1:length(g)){
-    if (typeof(g[[i]][[1]])=="integer" | is.null(g[[i]][[1]])){ #did not check every element in the secondary list because of the coercion hierarchy: character>complex>double>integer>logical
-      v = c(v, TRUE)
-    }
-    else {
-      v = c(v, FALSE)
-      #print(i)
-    }
+    v=c(v,is.integer(g[[i]][[1]])|is.null(g[[i]][[1]]))  
     if(is.null(g[[i]][[2]])){v=c(v,TRUE)}
     else{
       for (x in g[[i]][[2]]){
-        if(typeof(x)=="double"){
-          v=c(v,TRUE)
-        }else{
-          v=c(v,FALSE) 
-          #print(x)
-        }
+        v=c(v,is.double(x))
       }
     }
   }
   
   # Check that there are not any edges to non-existent vertices
   for (i in 1:length(g)){
-    if (prod(g[[i]][[1]]<=length(g)) == 1){ #don't need to specify if vector is empty, prod(NULL)==1
-      v = c(v, TRUE)}
-    else {
-      v = c(v, FALSE)
-    }
+    v=c(v,prod(g[[i]][[1]]<=length(g)) == 1)
   }
   
   # Check that all weights are greater than 0.
   for (i in 1:length(g)){
-    if (prod(g[[i]][[2]]>0) == 1){
-      v = c(v, TRUE)
-    }
-    else {
-      v = c(v, FALSE)
-    }
+    v=c(v,prod(g[[i]][[2]]>0) == 1)
   }
   
   print(v)
-  if(prod(v)==1){
-    return(TRUE)
-  }else{
-  return(FALSE)
-  }
-  
+  return(prod(v)==1)
 }
 is_valid(graph1)
 is_valid(graph2)
 
-is_undirected = function(g)
-{
+is_undirected = function(g){
+  if (is_valid(g)==FALSE){
+    return(FALSE)
+  }
+  j=adj_matrix(g)
+  q=t(adj_matrix(g))
+  if (j!=q){
+    return (FALSE)
+  }else{return (TRUE)}
+  }
+
+is_isomorphic = function(g1, g2){ 
+  if(is_valid(g1)==FALSE & is_valid(g2)==FALSE){
+    return (FALSE)
+  }
+  else if(sorted(names(g1))==sorted(names(g2))){
+    adj1<-adj_matrix(g1)
+    adj2<-adj_matrix(g2)
+    list1<-lapply(seq_len(nrow(adj1)), function(i) sort(adj1[i,]))
+    list2<-lapply(seq_len(nrow(adj2)), function(i) sort(adj2[i,]))
+    
+    return (prod(list2 %in% list1)==1)
+  }else{
+    return (FALSE)
+  }
+}
+
+
+is_connected=function(g, v1, v2){
+  v1exist=FALSE
+  v2exist=FALSE
+  indexv1=0
+  indexv2=0
+  
+  #check if is character not number and not array 
+  if(is.character(v1)==FALSE | length(v1)>1){
+    return(FALSE)
+  }
+  
+  if(is.character(v2)==FALSE | length(v2)>1){
+    return(FALSE)
+  }
+  #check if v1 and v2 exissts in the graph
+  for(i in 1:length(g)){
+    if(names(g[i]) == v1){
+      v1exist=TRUE
+    }
+    
+    if(names(g[i]) == v2){
+      v2exist=TRUE
+    }
+  }
+  
+  if(v1exist == FALSE|v2exist == FALSE){
+    return(FALSE)
+  }
+  #find index of the v1 and v2 on the graph/adjmatrix
+  for(i in 1:length(g)){
+    if(names(g[i]) == v1){
+      indexv1 = i
+    }
+    if(names(g[i]) == v2){
+      indexv2 = i      
+    }
+  }
+  #check if same node is conected
+  if(v1 == v2){
+    if(length(g[[indexv1]]$edges) == 0){ 
+      return(FALSE)
+    } 
+    else {
+      for (i in 1:length(g[[indexv1]]$edges)){
+        if(g[[indexv1]]$edges[i] == indexv2 ){
+          return(TRUE)
+        } 
+        else {
+          return(FALSE)
+        }
+      }
+    }
+  }
+  
+  
+  visited=list()
+  visited=c(visited, indexv1)
+  k=adj_matrix(g)
+  n=length(g)
+  while(n>0){
+    for (j in 1:length(visited)){
+      for ( i in 1:length(g)){
+        if (k[visited[[j]], i]>0){
+          visited=c(visited, i)
+        }
+      }
+    }
+    n=n-1
+  }
+  
+  for( i in 1:length(visited)){
+    if (visited[[i]]==indexv2)
+      return(TRUE)
+  }
   return(FALSE)
+  
+  
+  
 }
-
-
-is_isomorphic = function(g1, g2)
-{
-  return(FALSE)
-}
-
-
-is_connected = function(g, v1, v2)
-{
-  return(character())
-}
-
 
 shortest_path = function(g, v1, v2)
 {
