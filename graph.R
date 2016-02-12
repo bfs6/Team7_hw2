@@ -31,12 +31,9 @@ is_valid = function(g) {
   for (i in 1:length(g)){
     v=c(v,prod(g[[i]][[2]]>0) == 1)
   }
-  
-  print(v)
+
   return(prod(v)==1)
 }
-is_valid(graph1)
-is_valid(graph2)
 
 is_undirected = function(g){
   if (is_valid(g)==FALSE){
@@ -170,28 +167,3 @@ adj_matrix <- function(g)
   }
   return(m)
 }
-
-graph1 = list(A = list(edges   = c(2L),
-                       weights = c(1 )),
-              B = list(edges   = c(3L),
-                       weights = c(1 )),
-              C = list(edges   = c(5L),
-                       weights = c(1 )),
-              D = list(edges   = c(2L),
-                       weights = c(1 )),
-              E = list(edges   = c(4L,6L),
-                       weights = c(1,1)),
-              F = list(edges   = c(),
-                       weights = c())
-)
-graph2 = list(A = list(edges   = c(2L),
-                       weights = c(14)),
-              B = list(edges   = c(3L,4L),
-                       weights = c(23,13)),
-              D = list(edges   = c(1L),
-                       weights = c(5) ),
-              F = list(edges   = c(1L,5L),
-                       weights = c(43,33)),
-              N = list(edges   = c(1L,2L,4L),
-                       weights = c(33,22,11))
-)
