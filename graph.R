@@ -359,6 +359,6 @@ test_that("Bad graphs", {
   expect_error(is_connected("1",   "A","A"))
   expect_error(is_connected(TRUE,  "A","A"))
   expect_error(is_connected(c(A=1),"A","A"))
-})
+}) 
 
 
