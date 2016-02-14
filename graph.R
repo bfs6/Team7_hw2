@@ -3,7 +3,7 @@ is_valid = function(g) {
   #1. Check that g is a list of lists
   if(length(g)<1){
     print(1) 
-    return (FALSE)
+    return (FALSE)3
   }else if(!is.list(g)){
     print(1.1) 
     return(FALSE)
