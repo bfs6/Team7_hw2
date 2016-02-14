@@ -3,7 +3,7 @@ is_valid = function(g) {
   #1. Check that g is a list of lists
   if(length(g)<1){
     print(1) 
-    return (FALSE)3
+    return (FALSE)
   }else if(!is.list(g)){
     print(1.1) 
     return(FALSE)
@@ -71,8 +71,6 @@ is_valid = function(g) {
   return (TRUE)
 }
 
-
-
 is_undirected = function(g){
   if (is_valid(g)==FALSE){
     stop('error')
@@ -88,6 +86,28 @@ is_undirected = function(g){
   return(TRUE)
 }
 
+is_isomorphic = function(g1, g2){ 
+  if(is_valid(g1)==FALSE & is_valid(g2)==FALSE){
+    stop ("error")
+  }
+  if (length(g1)!=length(g2)){
+    return(FALSE)
+  }
+  if(length(setdiff(names(g1), names(g2)))!=0 && length(setdiff(names(g2), names(g1)))!=0){
+    return (FALSE)
+  }
+  a=adj_matrix(g1)
+  b=adj_matrix(g2)
+  for(i in names(g1)){
+    for(j in names(g1)){
+      if (a[i,j]!=b[i,j]){
+        return (FALSE)
+      }
+    }
+  }
+  return (TRUE)
+}
+
 is_connected=function(g, v1, v2){
   v1exist=FALSE
   v2exist=FALSE
@@ -100,7 +120,6 @@ is_connected=function(g, v1, v2){
   if(is.character(v1)==FALSE | length(v1)>1){
     stop("error")
   }
-  
   if(is.character(v2)==FALSE | length(v2)>1){
     stop("error")
   }
@@ -109,12 +128,10 @@ is_connected=function(g, v1, v2){
     if(names(g[i]) == v1){
       v1exist=TRUE
     }
-    
     if(names(g[i]) == v2){
       v2exist=TRUE
     }
   }
-  
   if(v1exist == FALSE|v2exist == FALSE){
     stop("error")
   }
@@ -132,42 +149,27 @@ is_connected=function(g, v1, v2){
     if(length(g[[indexv1]]$edges) == 0){ 
       return(FALSE)
     } 
-    else {
-      for (i in 1:length(g[[indexv1]]$edges)){
-        if(g[[indexv1]]$edges[i] == indexv2 ){
-          return(TRUE)
-        } 
-        else {
-          return(FALSE)
-        }
-      }
+    else if (indexv1 %in% g[[indexv1]]$edges){
+      return (TRUE)
     }
+    else{return (FALSE)}
   }
-  else if(v1 != v2){  
-    
-    
+  else if(v1 != v2){
     queue=integer()
     visited=integer()
-    
     queue=c(queue, indexv1)
     while(length(queue)>0){
       pop=queue[1]
       queue=queue[-1]
-      
-      
       if(!pop%in% visited){
         visited=c(visited, pop)
         for (values in g[[pop]]$edges){
-          
           if(!values%in%visited){
             queue=c(queue, values)
             print(queue)
           }
         }
-        
       }
-      
-      
     }
     print(visited)
     for( i in 1:length(visited)){
@@ -175,10 +177,22 @@ is_connected=function(g, v1, v2){
         return(TRUE)
     }
     return(FALSE)
-    
   }
-  
 }
+
+# graph1 = list(A = list(edges   = c(2L),
+#                        weights = c(1 )),
+#               B = list(edges   = c(3L),
+#                        weights = c(1 )),
+#               C = list(edges   = c(5L),
+#                        weights = c(1 )),
+#               D = list(edges   = c(2L),
+#                        weights = c(1 )),
+#               E = list(edges   = c(4L,6L),
+#                        weights = c(1,1  )),
+#               E = list(edges   = c(),
+#                        weights = c())
+# )
 
 context("Test is_connected")
 
@@ -347,20 +361,4 @@ test_that("Bad graphs", {
   expect_error(is_connected(c(A=1),"A","A"))
 })
 
-graph1 = list(A = list(edges   = c(2L),
-                       weights = c(1 )),
-              B = list(edges   = c(3L),
-                       weights = c(1 )),
-              C = list(edges   = c(5L),
-                       weights = c(1 )),
-              D = list(edges   = c(2L),
-                       weights = c(1 )),
-              E = list(edges   = c(4L,6L),
-                       weights = c(1,1  )),
-              E = list(edges   = c(),
-                       weights = c())
-)
 
-
-
-names(graph1)[1]
