@@ -1,3 +1,22 @@
+adj_matrix <- function(g)
+{
+  
+  m = matrix(0,nrow=length(g), ncol=length(g))
+  rownames(m) = names(g)
+  colnames(m) = names(g)
+  for (j in seq_along(g))
+  {
+    node = g[[j]]
+    
+    
+    for(i in seq_along(node$edges))
+    {
+      m[j, node$edges[i]] = node$weights[i]
+    }
+  }
+  return(m)
+}
+
 is_valid = function(g) {
   #Remark: in a valid graph, some vertices have empty vectors for edges and vertices if they don't point to anywhere
   #1. Check that g is a list of lists
@@ -412,6 +431,7 @@ adj_matrix <- function(g)
   }
   return(m)
 }
+
 context("Test is_valid")
 
 
