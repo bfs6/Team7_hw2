@@ -145,6 +145,7 @@ is_connected=function(g, v1, v2){
     }
   }
   #check if same node is conected
+<<<<<<< HEAD
   
   if(length(g[[indexv1]]$edges) == 0){ 
     return(FALSE)
@@ -163,6 +164,21 @@ is_connected=function(g, v1, v2){
     }
     
     
+=======
+  if(v1 == v2){
+    if(length(g[[indexv1]]$edges) == 0){ 
+      return(FALSE)
+    } 
+    else if (indexv1 %in% g[[indexv1]]$edges){
+      return (TRUE)
+    }
+    else{return (FALSE)}
+  }
+  else if(v1 != v2){
+    queue=integer()
+    visited=integer()
+    queue=c(queue, indexv1)
+>>>>>>> 3551047f009e320f8fcc99a432a3967c6b21b29f
     while(length(queue)>0){
       pop=queue[1]
       queue=queue[-1]
@@ -184,6 +200,7 @@ is_connected=function(g, v1, v2){
     return(FALSE)
   }
 }
+<<<<<<< HEAD
 
 
 shortest_path = function(g, v1, v2)
@@ -398,3 +415,5 @@ adj_matrix <- function(g)
   }
   return(m)
 }
+=======
+>>>>>>> 3551047f009e320f8fcc99a432a3967c6b21b29f
