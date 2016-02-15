@@ -1190,7 +1190,10 @@ test_that("Med valid graph", {
   expect_identical(shortest_path(g,"B","F"),  c("B","E","F"))
   expect_identical(shortest_path(g,"D","F"),  c("D","E","F"))
   expect_identical(shortest_path(g,"C","D"),  c("C","E","D"))
-})
+  
+}) }
+
+
 
 
 
