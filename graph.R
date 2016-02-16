@@ -2,69 +2,52 @@ is_valid = function(g) {
   #Remark: in a valid graph, some vertices have empty vectors for edges and vertices if they don't point to anywhere
   #1. Check that g is a list of lists
   if(length(g)<1){
-    #print(1) 
     return (FALSE)
   }else if(!is.list(g)){
-    #print(1.1) 
     return(FALSE)
   }else if(prod(sapply(g,is.list))!=1){
-    #print(1.2) 
     return (FALSE)
   }
   #2. Missing labels
   if(is.null(names(g))){
-    #print(2) 
     return(FALSE)
   }else if(TRUE %in% (sapply(names(g),function(x){x==""}))){
-    #print(2.1) 
     return (FALSE)
   }
   #missing labels also caught all the testing cases for invalid structure
   #3. invalid structure
   if(mean(sapply(g,length))!=2){
-    #print(3) 
     return (FALSE)
   }
   #4. duplicate labels
   if(length(names(g))!=length(unique(names(g)))){
-    #print(4)
     return(FALSE)
   }
   #5. invalid vertex reference
   if(!FALSE %in% sapply(g,function(x){length(x$edges)>0 & length(x$weights)>0}) & ! NA %in% unlist(g)){
     if(max(sapply(g,function(x){max(x$edges)})) > length(g)){
-      #print(5)
       return (FALSE)
     }
   }
-  #6. duplicate vertex
-  if(length(unique(names(g))) != length(g)){
-    #print(6) 
-    return (FALSE)
-  }
-  #7. edge type:
+  #6. edge type:
   for(i in g){
     if (FALSE %in% (sapply(i$edges,is.integer)) | NA %in% i$edges){
-      #print("bad edge")
       return (FALSE)
     }
   }
   #the test cases returns as false but I don't think they made it this far
-  #8. Weight type and value
+  #7. Weight type and value
   for(i in g){
     if (FALSE %in% (sapply(i$weights,is.double)) | NA %in% i$weights | FALSE %in% (sapply(i$weights,function(x){x>0}))){
-      #print("bad weight")
       return (FALSE)
     }
   }
-  #9. duplicate edges
+  #8. duplicate edges
   if(TRUE %in% sapply(g,function(x){duplicated(x$edges)})){
-    #print(9) 
     return (FALSE)
   }
-  #10 edge and weight lenth mismatch
+  #9 edge and weight lenth mismatch
   if(FALSE %in% sapply(g,function(x){length(x$edges) == length(x$weights)})){
-    #print(10) 
     return (FALSE)
   }
   #if all cases passed then the graph is valid
