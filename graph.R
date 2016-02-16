@@ -108,7 +108,8 @@ is_isomorphic = function(g1, g2){
   return (TRUE)
 }
 
-is_connected=function(g, v1, v2){
+is_connected=function(g, v1, v2)
+{
   v1exist=FALSE
   v2exist=FALSE
   indexv1=0
@@ -196,6 +197,7 @@ is_connected=function(g, v1, v2){
         return(TRUE)
     }
     return(FALSE)
+  }
   }
 }
 
@@ -394,8 +396,7 @@ dijkstras=function(g, v1){
 
 
 
-adj_matrix <- function(g)
-{
+adj_matrix <- function(g){
   
   m = matrix(0,nrow=length(g), ncol=length(g))
   rownames(m) = names(g)
@@ -412,7 +413,8 @@ adj_matrix <- function(g)
   }
   return(m)
 }
-}
+
+
 
 
 
