@@ -41,8 +41,10 @@ This to avoid this conflict, this modified BFS would search the graph and see if
 5. shortest_path(g, v1, v2)
 I first ran is_connected(g, v1, v2). If is_connected threw an error, then I would stop the function. If it returned false, then the function would return an empty character array. 
 If the two verticies were connected, then I had to find the shortest path. The way I did this was to run dijkstras algorithm to find the shortest distance.
+
 My implementation of dijkstras finds the shortest distance from vertex v1 to all other verticies stored in an integer array. It also computes an array of indices that is the previous vertex to the destination vertex 
 if we were to start at v1. Using this given information I can trace the path from any vertex v2 back to v1 granted that v2 is not v1, thus giving me the path. 
+
 However for the case where v1 equals v2, we have to find the shortest cycle that contains v1. To find the shortest cycle in this scenario, I ran djikstras algorithm to 
 compute an array of the distance of the shortest path to each other vertex and set the distance from v1 to itself as 0. 
 Then I iterated through all edges of each vertex to see if any of those edges were directed back to v1 thus detecting a cycle. 
