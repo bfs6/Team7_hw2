@@ -12,7 +12,6 @@ The is_valid function checks all possible cases of invalid graphs. If the graph 
 ```{r}
 g = list(list(edges   = c(1L, 2L),
                      weights = c(1, 1)))
-
 is_valid(g)
 ```
 
@@ -67,6 +66,7 @@ If the two verticies were connected, then I had to find the shortest path. The w
 
 However for the case where v1 equals v2, we have to find the shortest cycle that contains v1. To find the shortest cycle in this scenario, I ran djikstras algorithm to compute an array of the distance of the shortest path to each other vertex and set the distance from v1 to itself as 0. Then I iterated through all edges of each vertex to see if any of those edges were directed back to v1 thus detecting a cycle. If so, then we know that a cycle which has distance equal to the sum of the edge's weight directed back to v1 and dijkstra's shortest distance from v1 to that vertex. I would then find the shortest cycle amongst all cycles and output the corresponding path.
 
+<<<<<<< HEAD
 ```{r}
  g = list(A = list(edges   = c(2L),
                      weights = c(1)),
@@ -82,5 +82,4 @@ However for the case where v1 equals v2, we have to find the shortest cycle that
                      weights = numeric()))
 shortest_path(g,"A","B")
 ```
-
 <!-- If you attempt the extra credit, include your description below. -->
