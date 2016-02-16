@@ -3,6 +3,7 @@
 # Team7_hw2
 
 1. is_valid(g)
+
 The is_valid function checks all possible cases of invalid graphs. If the graph
 passes all the test cases for invalid graphs, the function returns TRUE.
 First check if the graph is a list of lists
@@ -19,18 +20,21 @@ if all these cases pass, then the graph is valid
 
 
 2. is_undirected(g)
+
 First check if the graph is valid using the is_valid function. If the graph is not valid then throw an error. 
 If the graph is valid, create an adjacency matrix of the graph using helper function adj_matrix. Then check if the transpose 
 of the adjacency matrix is equal to the adjacency matrix, thus meaning that there is a edge from a node i to j and vice versa. 
 We did this by running a double forloop and checking if the value of the index at (i, j) is equal to that at (j, i)
 
 3. is_isomorphic(g1, g2)
+
 First check if both graphs are valid. If either isn't then throw an error. Then I checked if the graphs have the same number of vertices with the same names. 
 If not, the function would return false. Lastly I would create two adjacency matrices for both graphs find their respective edges from one vertex to another. 
 If those edges did not have the same weight then I would return false. If every edge had the same weight that means the two graphs are isomorphic. 
 
 
 4. is_connected(g, v1, v2)
+
 First I checked if the graph is valid. If not the function threw an error. Then I checked if the verticies are characters. 
 If they were any other data structure the function would throw an error. Then I ran a BFS search starting at vertex v1 to see if we can 
 reach vertex v2, keeping the verticies that we can traverse in a integer list containing their index. However instead of initially placing
@@ -39,6 +43,7 @@ This is because v1 can equal v2 and that we have a directed graph.
 This to avoid this conflict, this modified BFS would search the graph and see if we can reach v1 from v1 as well.
 
 5. shortest_path(g, v1, v2)
+
 I first ran is_connected(g, v1, v2). If is_connected threw an error, then I would stop the function. If it returned false, then the function would return an empty character array. 
 
 If the two verticies were connected, then I had to find the shortest path. The way I did this was to run dijkstras algorithm to find the shortest distance.
