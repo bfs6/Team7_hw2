@@ -87,7 +87,7 @@ is_undirected = function(g){
 }
 
 is_isomorphic = function(g1, g2){ 
-  if(is_valid(g1)==FALSE & is_valid(g2)==FALSE){
+  if(is_valid(g1)==FALSE || is_valid(g2)==FALSE){
     stop ("error")
   }
   if (length(g1)!=length(g2)){
@@ -413,11 +413,4 @@ adj_matrix <- function(g){
   }
   return(m)
 }
-
-
-
-
-
-
-
 
