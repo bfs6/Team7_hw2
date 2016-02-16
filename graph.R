@@ -412,6 +412,8 @@ adj_matrix <- function(g)
   }
   return(m)
 }
+}
+
 
 
 
