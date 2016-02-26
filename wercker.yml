@@ -5,10 +5,12 @@ build:
     - script:
         name: Check for allowed files
         code: |
+          echo ""
           Rscript -e "source('https://raw.githubusercontent.com/Sta323-Sp16/Homework/master/hw2/hw2_whitelist.R')"
     - script:
         name: Render R markdown
         code: |
+          echo ""
           Rscript -e "library(rmarkdown);render('hw2.Rmd')"
     - script:
         name: Get Tests
